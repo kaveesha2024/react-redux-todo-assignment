@@ -1,7 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { storeTask } from "./utilities/state/taskSlice.js";
 
 const App = () => {
@@ -26,15 +26,14 @@ const App = () => {
           value={task}
           onChange={taskHandler}
         />
-          <Button
-            variant="contained"
-            onClick={addNewTasks}
-            endIcon={<SendIcon />}
-          >
-            Add
-          </Button>
-        <div className="mt-4">
-        </div>
+        <Button
+          variant="contained"
+          onClick={addNewTasks}
+          endIcon={<SendIcon />}
+        >
+          Add
+        </Button>
+        <div className="mt-4"></div>
       </div>
     </>
   );
