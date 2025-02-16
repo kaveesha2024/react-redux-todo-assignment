@@ -1,8 +1,9 @@
-import { Button, TextField } from "@mui/material";
+import { Button, IconButton, TextField } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { storeTask } from "./utilities/state/taskSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { removeTask, storeTask } from "./utilities/state/taskSlice.js";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const App = () => {
   const [task, setTask] = useState("");
@@ -14,6 +15,7 @@ const App = () => {
     dispatch(storeTask(task));
     setTask("");
   };
+  const alreadyAddedTasks = useSelector((state) => state.todo.task);
 
   return (
     <>
@@ -33,7 +35,23 @@ const App = () => {
         >
           Add
         </Button>
-        <div className="mt-4"></div>
+        <div className="mt-4">
+          {alreadyAddedTasks.length > 0 &&
+            alreadyAddedTasks.map((task) => (
+              <div key={task.id} className="mt-4">
+                <span className="mr-4">{task.task}</span>
+                <span>
+                  <IconButton
+                    aria-label="delete"
+                    color="error"
+                    onClick={() => dispatch(removeTask(task.id))}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </span>
+              </div>
+            ))}
+        </div>
       </div>
     </>
   );
